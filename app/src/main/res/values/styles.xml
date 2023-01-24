@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="edt_default">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:background">@drawable/edt_bg</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:fontFamily">@font/poppinsregular</item>
+        <item name="android:textColorHint">@color/hint</item>
+    </style>
+
+    <style name="button_default">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:backgroundTint">@color/primary</item>
+        <item name="android:fontFamily">@font/poppinsregular</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="title_default">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:fontFamily">@font/poppinssemibold</item>
+    </style>
+</resources>
