@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg3"
+    tools:context=".view.lobby.LobbyFragment">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/llLobbyProfile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="145dp"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:orientation="vertical">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/ivLobbyUserImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/persondefault"
+            />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:cardCornerRadius="6dp"
+            app:cardBackgroundColor="@color/white">
+            <TextView
+                android:id="@+id/txtLobbyUserName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                style="@style/title_default"
+                android:gravity="center_vertical"
+                android:textColor="@color/black"
+                tools:text="Nome"/>
+        </androidx.cardview.widget.CardView>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/llLobbyProfile"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/edtLobbyRoomID"
+            style="@style/edt_default"
+            android:layout_marginBottom="5dp"
+            android:hint="@string/title_room_id"/>
+        <Button
+            android:id="@+id/btnLobbyEnterRoom"
+            style="@style/button_default"
+            android:layout_marginBottom="5dp"
+            android:text="@string/title_enter_in_the_room"/>
+        <Button
+            android:id="@+id/btnLobbyCreateNewRoom"
+            style="@style/button_default"
+            android:layout_marginBottom="5dp"
+            android:text="@string/title_create_new_room"/>
+        <Button
+            android:id="@+id/edtLobbyMyStatus"
+            style="@style/button_default"
+            android:layout_marginBottom="5dp"
+            android:text="@string/title_my_status"/>
+
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
