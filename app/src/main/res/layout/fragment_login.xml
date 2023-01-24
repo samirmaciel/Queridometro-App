@@ -39,6 +39,7 @@
 
         <Button
             android:text="@string/title_enter"
+            app:cornerRadius="15dp"
             style="@style/button_default" />
 
     </LinearLayout>

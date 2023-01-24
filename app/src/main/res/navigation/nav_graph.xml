@@ -10,5 +10,43 @@
         android:id="@+id/loginFragment"
         android:name="com.samirmaciel.queridometroapp.view.login.LoginFragment"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login" />
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_lobbyFragment"
+            app:destination="@id/lobbyFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.samirmaciel.queridometro.view.home.HomeFragment"
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home"/>
+    <fragment
+        android:id="@+id/lobbyFragment"
+        android:name="com.samirmaciel.queridometro.view.lobby.LobbyFragment"
+        tools:layout="@layout/fragment_lobby"
+        android:label="LobbyFragment" >
+        <action
+            android:id="@+id/action_lobbyFragment_to_selectFragment"
+            app:destination="@id/selectFragment" />
+        <action
+            android:id="@+id/action_lobbyFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.samirmaciel.queridometro.view.register.RegisterFragment"
+        tools:layout="@layout/fragment_register"
+        android:label="RegisterFragment" />
+    <fragment
+        android:id="@+id/selectFragment"
+        android:name="com.samirmaciel.queridometro.view.select.SelectFragment"
+        tools:layout="@layout/fragment_select"
+        android:label="SelectFragment" >
+        <action
+            android:id="@+id/action_selectFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
 </navigation>

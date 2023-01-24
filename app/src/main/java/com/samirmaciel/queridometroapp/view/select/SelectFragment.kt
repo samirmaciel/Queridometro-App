@@ -5,8 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.samirmaciel.queridometro.R
-import com.samirmaciel.queridometro.databinding.FragmentSelectBinding
+import com.samirmaciel.queridometroapp.R
+import com.samirmaciel.queridometroapp.databinding.FragmentSelectBinding
 
 
 class SelectFragment : Fragment(R.layout.fragment_select) {
