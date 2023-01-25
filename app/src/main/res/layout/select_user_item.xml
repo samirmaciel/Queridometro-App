@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/ivSelectUserImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:src="@drawable/persondefault"/>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        app:cardCornerRadius="6dp">
+
+        <TextView
+            android:id="@+id/txtSelectUserName"
+            style="@style/title_default"
+            android:textColor="@color/black"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="2dp"
+            android:textSize="15sp"
+            tools:text="userName"/>
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>
