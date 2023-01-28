@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.GridLayout
 import android.widget.LinearLayout
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.samirmaciel.queridometroapp.R
@@ -28,6 +29,13 @@ class SelectFragment : Fragment(R.layout.fragment_select) {
         setupBinding(view)
         setupViewModel()
         setupObservers()
+        setupListeners()
+    }
+
+    private fun setupListeners() {
+        mBinding?.btnSelectContinue?.setOnClickListener {
+            findNavController().navigate(R.id.action_selectFragment_to_homeFragment)
+        }
     }
 
     private fun setupObservers() {

@@ -15,7 +15,7 @@
     <string name="title_enter_in_the_room">Entrar na sala</string>
     <string name="title_create_new_room">Criar nova sala</string>
     <string name="title_my_status">Meu status</string>
-    <string name="title_select_friend">Selecione um amigo(a)</string>
+    <string name="title_select_friend">Selecione um participante(a)</string>
     <string name="title_continue">Continuar</string>
     <string name="title_home_room_id">ID da sala:</string>
 </resources>

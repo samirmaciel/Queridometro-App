@@ -5,6 +5,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginVertical="16dp"
+    android:gravity="center_vertical"
     tools:background="@color/black"
     android:orientation="horizontal">
 
@@ -15,7 +17,7 @@
         android:orientation="vertical">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/ivCarouselUserImage"
+            android:id="@+id/ciCarouselUserImage"
             android:layout_width="50dp"
             android:layout_height="50dp"
             tools:src="@drawable/persondefault"/>
@@ -40,6 +42,8 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvCarouselEmoji"
         android:layout_width="match_parent"
+        android:layout_gravity="bottom"
+        android:layout_marginHorizontal="8dp"
         android:layout_height="wrap_content"/>
 
 </LinearLayout>
