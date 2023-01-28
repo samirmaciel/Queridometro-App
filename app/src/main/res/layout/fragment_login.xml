@@ -38,6 +38,7 @@
             style="@style/edt_default" />
 
         <Button
+            android:id="@+id/btnLoginEnter"
             android:text="@string/title_enter"
             app:cornerRadius="15dp"
             style="@style/button_default" />

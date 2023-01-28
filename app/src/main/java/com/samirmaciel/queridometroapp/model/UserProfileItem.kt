@@ -1,6 +1,6 @@
 package com.samirmaciel.queridometroapp.model
 
-data class UserCarouselItem(
+data class UserProfileItem(
     val userName : String,
     val profileImage : String,
     val emojiList : List<EmojiCarouselItem>
