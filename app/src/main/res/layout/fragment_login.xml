@@ -5,6 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg1"
+    android:layout_marginStart="-5dp"
+    android:layout_marginEnd="-5dp"
+    android:layout_marginTop="-5dp"
+    android:layout_marginBottom="-5dp"
     tools:context=".view.login.LoginFragment">
 
     <ImageView
@@ -28,24 +32,32 @@
         android:layout_marginEnd="51dp"
         android:orientation="vertical">
         <EditText
+            android:id="@+id/edtLoginEmail"
             android:layout_marginBottom="10dp"
+            android:inputType="textEmailAddress"
             android:hint="@string/title_email"
             style="@style/edt_default" />
 
         <EditText
+            android:id="@+id/edtLoginPassword"
             android:layout_marginBottom="10dp"
+            android:inputType="textPassword"
+            android:maxLength="20"
             android:hint="@string/title_password"
             style="@style/edt_default" />
 
         <Button
             android:id="@+id/btnLoginEnter"
             android:text="@string/title_enter"
+            android:textColor="@color/white"
+            android:enabled="false"
             app:cornerRadius="15dp"
             style="@style/button_default" />
 
     </LinearLayout>
 
     <TextView
+        android:id="@+id/txtLoginNewRegister"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
