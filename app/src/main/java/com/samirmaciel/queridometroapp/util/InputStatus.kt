@@ -1,4 +1,4 @@
-package com.samirmaciel.queridometroapp.view.login.viewModel
+package com.samirmaciel.queridometroapp.util
 
 enum class InputStatus {
     INPUT_FILL,

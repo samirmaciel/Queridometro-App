@@ -3,6 +3,7 @@ package com.samirmaciel.queridometroapp.view.login.viewModel
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.samirmaciel.queridometroapp.util.InputStatus
 
 class LoginViewModel: ViewModel() {
 
@@ -19,18 +20,18 @@ class LoginViewModel: ViewModel() {
         }
     }
 
-    fun getAllInputStatus(): InputStatus{
+    fun getAllInputStatus(): InputStatus {
         if(inputEmailStatus.value == InputStatus.INPUT_FILL && inputPasswordStatus.value == InputStatus.INPUT_FILL) return InputStatus.INPUT_FILL
 
         return InputStatus.INPUT_NOT_FILL
     }
 
-    fun validateInputEmail(email: String) : InputStatus{
+    fun validateInputEmail(email: String) : InputStatus {
         if(email.trim().length >= 10) return InputStatus.INPUT_FILL
         return InputStatus.INPUT_NOT_FILL
     }
 
-    fun validateInputPassword(password: String) : InputStatus{
+    fun validateInputPassword(password: String) : InputStatus {
         if(password.trim().length >= 8) return InputStatus.INPUT_FILL
         return InputStatus.INPUT_NOT_FILL
     }

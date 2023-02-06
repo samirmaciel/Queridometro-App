@@ -5,6 +5,10 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/bg2"
+    android:layout_marginTop="-20dp"
+    android:layout_marginStart="-10dp"
+    android:layout_marginEnd="-10dp"
+    android:layout_marginBottom="-10dp"
     tools:context=".view.register.RegisterFragment">
 
 
@@ -19,20 +23,22 @@
         android:layout_marginTop="128dp"
         app:cardBackgroundColor="@color/labelBG">
 
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
             <TextView
                 android:id="@+id/txtRegisterPhoto"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
                 style="@style/title_default"
                 android:text="@string/title_photo"
                 android:textSize="40sp"
                 android:textColor="@color/white"/>
-        </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/cvRegisterImage"
+                android:elevation="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
     </androidx.cardview.widget.CardView>
 
     <androidx.appcompat.widget.LinearLayoutCompat
@@ -50,6 +56,7 @@
             android:id="@+id/edtRegisterName"
             android:layout_marginBottom="10dp"
             android:hint="@string/title_name"
+            android:maxLength="20"
             style="@style/edt_default"/>
         <EditText
             android:id="@+id/edtRegisterEmail"
@@ -60,11 +67,15 @@
             android:id="@+id/edtRegisterPassword"
             android:layout_marginBottom="10dp"
             android:hint="@string/title_password"
+            android:inputType="textPassword"
+            android:maxLength="20"
             style="@style/edt_default"/>
         <EditText
             android:id="@+id/edtRegisterRepeatPassword"
             android:layout_marginBottom="10dp"
             android:hint="@string/title_repeatpassword"
+            android:inputType="textPassword"
+            android:maxLength="20"
             style="@style/edt_default"/>
 
         <Button
@@ -72,6 +83,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/title_confirm"
+            app:cornerRadius="15dp"
             style="@style/button_default"/>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
