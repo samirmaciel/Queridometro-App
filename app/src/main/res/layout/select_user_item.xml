@@ -6,13 +6,29 @@
     android:orientation="vertical"
     android:gravity="center"
     android:layout_margin="8dp"
+    tools:background="@color/black"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+    <FrameLayout
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/ciSelectUserImage"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        tools:src="@drawable/persondefault"/>
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/ciSelectUserImage"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            tools:src="@drawable/persondefault"/>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/ciSelectedEmojiImage"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="bottom"
+            tools:src="@drawable/persondefault"/>
+
+    </FrameLayout>
+
 
     <androidx.cardview.widget.CardView
         android:layout_width="80dp"

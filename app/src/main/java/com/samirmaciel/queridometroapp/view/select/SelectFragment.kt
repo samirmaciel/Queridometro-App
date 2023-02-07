@@ -1,6 +1,7 @@
 package com.samirmaciel.queridometro.view.select
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.samirmaciel.queridometroapp.R
 import com.samirmaciel.queridometroapp.databinding.FragmentSelectBinding
 import com.samirmaciel.queridometroapp.model.UserProfileItem
+import com.samirmaciel.queridometroapp.model.UserProfileItemSelection
 import com.samirmaciel.queridometroapp.view.select.adapter.UserSelectAdapter
 import com.samirmaciel.queridometroapp.view.viewModel.SharedViewModel
 
@@ -45,11 +47,12 @@ class SelectFragment : Fragment(R.layout.fragment_select) {
     }
 
     private fun setupAdapter(userProfileItemList: List<UserProfileItem>){
-        var adapter = UserSelectAdapter()
+        var adapter = UserSelectAdapter(childFragmentManager)
+
         mBinding?.rvSelectFriend?.adapter = adapter
         mBinding?.rvSelectFriend?.layoutManager = GridLayoutManager(requireContext(), 3)
 
-        adapter.userProfileItemList = userProfileItemList
+        adapter.userProfileItemList = userProfileItemList.map { UserProfileItemSelection(it) }
         adapter.notifyDataSetChanged()
     }
 

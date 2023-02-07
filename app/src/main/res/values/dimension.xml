@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="emojiSelectionSize">60dp</dimen>
+    <dimen name="emojiSelectedSize">80dp</dimen>
+</resources>
