@@ -35,10 +35,11 @@
         tools:listitem="@layout/select_user_item"/>
 
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnSelectContinue"
         style="@style/button_default"
         android:text="@string/title_continue"
+        app:cornerRadius="15dp"
         android:layout_marginBottom="28dp"
         android:layout_marginHorizontal="50dp"
         app:layout_constraintBottom_toBottomOf="parent"

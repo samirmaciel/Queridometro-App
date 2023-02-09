@@ -18,7 +18,7 @@ import com.samirmaciel.queridometroapp.view.select.selection.SelectionEmojiFragm
 import de.hdodenhof.circleimageview.CircleImageView
 
 
-class UserSelectAdapter(val childFragmentManager: FragmentManager) : RecyclerView.Adapter<UserSelectAdapter.MyViewHolder>() {
+class UserSelectAdapter(val childFragmentManager: FragmentManager, val onChangeList: (List<UserProfileItemSelection>) -> Unit) : RecyclerView.Adapter<UserSelectAdapter.MyViewHolder>() {
 
     var userProfileItemList: List<UserProfileItemSelection> = listOf()
 
@@ -28,7 +28,7 @@ class UserSelectAdapter(val childFragmentManager: FragmentManager) : RecyclerVie
         val emojiImage = itemView.findViewById<ImageView>(R.id.ciSelectedEmojiImage)
         val userName = itemView.findViewById<TextView>(R.id.txtSelectUserName)
 
-        fun onBindItem(position: Int){
+        fun onBindItem(position: Int, onChangeList: (List<UserProfileItemSelection>) -> Unit){
             Glide.with(itemView.context).load(userProfileItemList[position].userProfileItem.profileImage).into(userImage);
 
             userName.text = userProfileItemList[position].userProfileItem.userName
@@ -41,6 +41,7 @@ class UserSelectAdapter(val childFragmentManager: FragmentManager) : RecyclerVie
 
                 SelectionEmojiFragment {
                     userProfileItemList[position].userEmojiSelected = it.emojiID
+                    onChangeList(userProfileItemList)
                     notifyItemChanged(position)
                 }.show(childFragmentManager, "SelectionEmojiFragment")
             }
@@ -57,6 +58,6 @@ class UserSelectAdapter(val childFragmentManager: FragmentManager) : RecyclerVie
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.onBindItem(position)
+        holder.onBindItem(position, onChangeList)
     }
 }

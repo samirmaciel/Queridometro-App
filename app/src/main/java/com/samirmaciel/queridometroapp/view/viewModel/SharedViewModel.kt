@@ -6,12 +6,12 @@ import androidx.lifecycle.ViewModel
 import com.samirmaciel.queridometroapp.mock.UserMock
 import com.samirmaciel.queridometroapp.model.UserProfileItem
 
-class SharedViewModel : ViewModel() {
+open class SharedViewModel : ViewModel() {
 
     var userProfileItemList: MutableLiveData<List<UserProfileItem>> = MutableLiveData()
 
     init {
-        loadUserProfileItemList()
+
     }
 
     private fun loadUserProfileItemList(){

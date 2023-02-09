@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.samirmaciel.queridometroapp.R
 import com.samirmaciel.queridometroapp.databinding.FragmentHomeBinding
+import com.samirmaciel.queridometroapp.mock.UserMock
 import com.samirmaciel.queridometroapp.model.UserProfileItem
 import com.samirmaciel.queridometroapp.view.home.adpter.UserCarouselAdapter
 import com.samirmaciel.queridometroapp.view.viewModel.SharedViewModel
@@ -42,9 +43,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
     private fun setupObservers() {
-        mSharedViewModel?.userProfileItemList?.observe(viewLifecycleOwner) {
-            setupAdapter(it)
-        }
+        setupAdapter(UserMock.generalUserList)
     }
 
     private fun setupViewModel() {

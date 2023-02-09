@@ -6,6 +6,8 @@ import com.samirmaciel.queridometroapp.model.UserProfileItem
 
 object UserMock {
 
+    var generalUserList: List<UserProfileItem> = getUserCarouselListItem()
+
     fun getUserCarouselListItem() : List<UserProfileItem>{
         return listOf<UserProfileItem>(
             UserProfileItem("Black", "https://s2.glbimg.com/HNtVguV5kfdFMyGdB-sAGcFDXa0=/i.s3.glbimg.com/v1/AUTH_e84042ef78cb4708aeebdf1c68c6cbd6/internal_photos/bs/2023/q/8/isGwrhTseVHYUkKFfvpA/cezar-foto-330-270-bbb23.png", getEmojiCarouselListItem()),
@@ -18,13 +20,13 @@ object UserMock {
 
     }
 
-    fun getEmojiCarouselListItem(): List<EmojiCarouselItem>{
+    fun getEmojiCarouselListItem(): MutableList<EmojiCarouselItem>{
 
-       return listOf<EmojiCarouselItem>(
-            EmojiCarouselItem(R.drawable.emojibanana, 2),
-            EmojiCarouselItem(R.drawable.emojiheart, 4),
-            EmojiCarouselItem(R.drawable.emojihappy, 8),
-            EmojiCarouselItem(R.drawable.emojiplant, 6),
+       return mutableListOf(
+//            EmojiCarouselItem(R.drawable.emojibanana, 2),
+//            EmojiCarouselItem(R.drawable.emojiheart, 4),
+//            EmojiCarouselItem(R.drawable.emojihappy, 8),
+//            EmojiCarouselItem(R.drawable.emojiplant, 6),
         )
     }
 
