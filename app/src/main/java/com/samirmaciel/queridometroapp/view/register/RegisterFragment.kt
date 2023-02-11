@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -58,8 +59,15 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
         mBinding?.edtRegisterEmail?.doOnTextChanged { email, _, _, _ -> mViewModel?.validateInputEmail(email.toString())  }
         mBinding?.edtRegisterPassword?.doOnTextChanged { password, _, _, _ -> mViewModel?.validateInputPassword(password.toString())  }
         mBinding?.edtRegisterRepeatPassword?.doOnTextChanged { repeatedPassword, _, _, _ -> mViewModel?.validateInputRepeatedPassword(repeatedPassword.toString(), mBinding?.edtRegisterPassword?.text.toString())  }
+
         mBinding?.cvRegisterImage?.setOnClickListener{
             captureImage()
+        }
+
+        mBinding?.btnRegisterConfirm?.setOnClickListener {
+            mViewModel?.registerUser(mBinding?.edtRegisterName?.text.toString(), mBinding?.edtRegisterEmail?.text.toString(), mBinding?.edtRegisterPassword?.text.toString()){
+                Toast.makeText(requireContext(), it.second, Toast.LENGTH_LONG).show()
+            }
         }
 
     }
@@ -78,7 +86,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
                 val capturedImage = data?.data
                 //capturedImage.compress(Bitmap.CompressFormat.PNG, 100, streamImagem)
                 mBinding?.cvRegisterImage?.setImageURI(capturedImage)
-                Log.d("TESTEIMGE", "onActivityResult: " + requestCode)
+                mViewModel?.imageCaptured?.value = capturedImage
             } catch (e: Exception) {
                 Log.d("TESTEIMGE", "onActivityResult: " + e.message)
             }

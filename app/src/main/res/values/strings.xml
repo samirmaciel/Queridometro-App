@@ -18,4 +18,5 @@
     <string name="title_select_friend">Selecione um participante</string>
     <string name="title_continue">Continuar</string>
     <string name="title_home_room_id">ID da sala:</string>
+    <string name="title_creating_your_room">Criando sua sala...</string>
 </resources>

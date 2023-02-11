@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.samirmaciel.queridometroapp.R
-import com.samirmaciel.queridometroapp.model.EmojiCarouselItem
 import com.samirmaciel.queridometroapp.model.EmojiSelectionItem
 
 class EmojiSelectAdapter(val onSelectedEmoji: (EmojiSelectionItem) -> Unit) : RecyclerView.Adapter<EmojiSelectAdapter.MyViewHolder>() {

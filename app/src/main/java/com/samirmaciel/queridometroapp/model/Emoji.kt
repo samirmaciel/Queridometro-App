@@ -1,6 +1,6 @@
 package com.samirmaciel.queridometroapp.model
 
-data class EmojiCarouselItem(
+data class Emoji(
     val emojiID : Int,
     var count : Int = 0
 )

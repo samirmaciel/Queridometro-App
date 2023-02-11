@@ -1,21 +1,15 @@
 package com.samirmaciel.queridometro.view.select
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.GridLayout
-import android.widget.LinearLayout
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.samirmaciel.queridometroapp.R
 import com.samirmaciel.queridometroapp.databinding.FragmentSelectBinding
 import com.samirmaciel.queridometroapp.mock.UserMock
-import com.samirmaciel.queridometroapp.model.UserProfileItem
+import com.samirmaciel.queridometroapp.model.FireBaseModels.UserProfile
 import com.samirmaciel.queridometroapp.model.UserProfileItemSelection
 import com.samirmaciel.queridometroapp.view.select.adapter.UserSelectAdapter
 import com.samirmaciel.queridometroapp.view.select.viewModel.SelectViewModel
@@ -45,10 +39,10 @@ class SelectFragment : Fragment(R.layout.fragment_select) {
     }
 
     private fun setupObservers() {
-        setupAdapter(UserMock.generalUserList)
+        setupAdapter(UserMock.generalUserListProfile)
     }
 
-    private fun setupAdapter(userProfileItemList: List<UserProfileItem>){
+    private fun setupAdapter(userProfileList: List<UserProfile>){
         var adapter = UserSelectAdapter(childFragmentManager){
 
             if(mViewModel?.validateSelectionUsersEmoji(it) == true){
@@ -61,7 +55,7 @@ class SelectFragment : Fragment(R.layout.fragment_select) {
         mBinding?.rvSelectFriend?.adapter = adapter
         mBinding?.rvSelectFriend?.layoutManager = GridLayoutManager(requireContext(), 3)
 
-        adapter.userProfileItemList = userProfileItemList.map { UserProfileItemSelection(it) }
+        adapter.userProfileItemList = userProfileList.map { UserProfileItemSelection(it) }
         adapter.notifyDataSetChanged()
     }
 
@@ -82,9 +76,9 @@ class SelectFragment : Fragment(R.layout.fragment_select) {
     }
 
     private fun setupViewModel() {
-        sharedViewModel = ViewModelProvider(this).get(SharedViewModel::class.java)
+        sharedViewModel = ViewModelProvider(requireActivity()).get(SharedViewModel::class.java)
         mViewModel = ViewModelProvider(this).get(SelectViewModel::class.java)
-        mViewModel?.initializeViewModel(sharedViewModel?.userProfileItemList)
+        mViewModel?.initializeViewModel(sharedViewModel?.userProfileList)
     }
 
     private fun setupBinding(view: View) {

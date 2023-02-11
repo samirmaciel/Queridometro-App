@@ -7,20 +7,20 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.samirmaciel.queridometroapp.R
-import com.samirmaciel.queridometroapp.model.EmojiCarouselItem
+import com.samirmaciel.queridometroapp.model.Emoji
 
 class EmojiCarouselAdapter : RecyclerView.Adapter<EmojiCarouselAdapter.MyViewHolder>() {
 
-    var emojiCarouselItemList: List<EmojiCarouselItem> = listOf()
+    var emojiList: List<Emoji> = listOf()
 
     class MyViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
 
         val emojiImage = itemView.findViewById<ImageView>(R.id.ivEmojiCarousel)
         val txtCountEmoji = itemView.findViewById<TextView>(R.id.txtCountEmojiCarousel)
 
-        fun onBindItem(emojiCarouselItem: EmojiCarouselItem){
-            emojiImage.setImageResource(emojiCarouselItem.emojiID)
-            txtCountEmoji.text = emojiCarouselItem.count.toString()
+        fun onBindItem(emoji: Emoji){
+            emojiImage.setImageResource(emoji.emojiID)
+            txtCountEmoji.text = emoji.count.toString()
         }
 
     }
@@ -31,10 +31,10 @@ class EmojiCarouselAdapter : RecyclerView.Adapter<EmojiCarouselAdapter.MyViewHol
     }
 
     override fun getItemCount(): Int {
-        return emojiCarouselItemList.size
+        return emojiList.size
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.onBindItem(emojiCarouselItemList[position])
+        holder.onBindItem(emojiList[position])
     }
 }

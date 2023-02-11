@@ -42,7 +42,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         mBinding?.edtLoginPassword?.doOnTextChanged{password, _,_,_ -> mViewModel?.setInputPasswordStatus(mViewModel?.validateInputPassword(password.toString()))}
 
         mBinding?.btnLoginEnter?.setOnClickListener {
-            findNavController().navigate(R.id.action_loginFragment_to_selectFragment)
+            findNavController().navigate(R.id.action_loginFragment_to_lobbyFragment)
         }
 
         mBinding?.txtLoginNewRegister?.setOnClickListener {

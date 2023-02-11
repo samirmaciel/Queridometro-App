@@ -57,23 +57,45 @@
         <EditText
             android:id="@+id/edtLobbyRoomID"
             style="@style/edt_default"
+            android:textColor="@color/white"
+            android:maxLength="15"
             android:layout_marginBottom="5dp"
             android:hint="@string/title_room_id"/>
         <Button
             android:id="@+id/btnLobbyEnterRoom"
             style="@style/button_default"
+            app:cornerRadius="15dp"
             android:layout_marginBottom="5dp"
             android:text="@string/title_enter_in_the_room"/>
         <Button
             android:id="@+id/btnLobbyCreateNewRoom"
             style="@style/button_default"
+            app:cornerRadius="15dp"
             android:layout_marginBottom="5dp"
             android:text="@string/title_create_new_room"/>
         <Button
-            android:id="@+id/edtLobbyMyStatus"
+            android:id="@+id/btnLobbyMyStatus"
+            app:cornerRadius="15dp"
             style="@style/button_default"
             android:layout_marginBottom="5dp"
             android:text="@string/title_my_status"/>
+
+        <ProgressBar
+            android:id="@+id/progressLoadCreatingRoom"
+            android:visibility="gone"
+            tools:visibility="visible"
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/txtCreatingYourRoom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            tools:visibility="visible"
+            android:text="@string/title_creating_your_room"
+            style="@style/title_default"/>
 
 
     </LinearLayout>

@@ -8,12 +8,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.samirmaciel.queridometroapp.R
-import com.samirmaciel.queridometroapp.model.UserProfileItem
+import com.samirmaciel.queridometroapp.model.FireBaseModels.UserProfile
 import de.hdodenhof.circleimageview.CircleImageView
 
 class UserCarouselAdapter : RecyclerView.Adapter<UserCarouselAdapter.MyViewHolder>() {
 
-    var userProfileItemList: List<UserProfileItem> = listOf()
+    var userProfileList: List<UserProfile> = listOf()
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
@@ -21,9 +21,9 @@ class UserCarouselAdapter : RecyclerView.Adapter<UserCarouselAdapter.MyViewHolde
         val userName = itemView.findViewById<TextView>(R.id.txtCarouselUserName)
         val rvEmoji = itemView.findViewById<RecyclerView>(R.id.rvCarouselEmoji)
 
-        fun onBindItem(userProfileItem: UserProfileItem){
-            Glide.with(itemView.context).load(userProfileItem.profileImage).into(userImage)
-            userName.text = userProfileItem.userName
+        fun onBindItem(userProfile: UserProfile){
+            Glide.with(itemView.context).load(userProfile.profileImage).into(userImage)
+            userName.text = userProfile.userName
 
             val emojiAdapter = EmojiCarouselAdapter()
 
@@ -32,7 +32,7 @@ class UserCarouselAdapter : RecyclerView.Adapter<UserCarouselAdapter.MyViewHolde
                 layoutManager = LinearLayoutManager(itemView.context, LinearLayoutManager.HORIZONTAL, false)
             }
 
-            emojiAdapter.emojiCarouselItemList = userProfileItem.emojiList
+            emojiAdapter.emojiList = userProfile.currentEmojiList
             emojiAdapter.notifyDataSetChanged()
         }
 
@@ -44,10 +44,10 @@ class UserCarouselAdapter : RecyclerView.Adapter<UserCarouselAdapter.MyViewHolde
     }
 
     override fun getItemCount(): Int {
-        return if(userProfileItemList == null) 0 else Int.MAX_VALUE
+        return if(userProfileList == null) 0 else Int.MAX_VALUE
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.onBindItem(userProfileItemList[position % userProfileItemList.size])
+        holder.onBindItem(userProfileList[position % userProfileList.size])
     }
 }

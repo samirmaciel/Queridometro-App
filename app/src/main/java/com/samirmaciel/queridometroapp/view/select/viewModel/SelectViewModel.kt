@@ -2,17 +2,16 @@ package com.samirmaciel.queridometroapp.view.select.viewModel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.samirmaciel.queridometroapp.mock.UserMock
-import com.samirmaciel.queridometroapp.model.EmojiCarouselItem
-import com.samirmaciel.queridometroapp.model.UserProfileItem
+import com.samirmaciel.queridometroapp.model.Emoji
+import com.samirmaciel.queridometroapp.model.FireBaseModels.UserProfile
 import com.samirmaciel.queridometroapp.model.UserProfileItemSelection
 
 class SelectViewModel : ViewModel() {
 
-    var mUserProfileItemList: MutableLiveData<List<UserProfileItem>>? = null
+    var mUserListProfile: MutableLiveData<List<UserProfile>>? = null
 
-    fun initializeViewModel(userProfileItemList: MutableLiveData<List<UserProfileItem>>?){
-        mUserProfileItemList = userProfileItemList
+    fun initializeViewModel(userProfileList: MutableLiveData<List<UserProfile>>?){
+        mUserListProfile = userProfileList
     }
 
     fun validateSelectionUsersEmoji(list: List<UserProfileItemSelection>): Boolean{
@@ -25,12 +24,12 @@ class SelectViewModel : ViewModel() {
     }
 
     fun generatedUserProfileItemList(userProfileItemSelection: List<UserProfileItemSelection>){
-        UserMock.generalUserList = userProfileItemSelection.map { userProfileItemSelection ->
-            val emojiList = verifyHasEmoji(userProfileItemSelection.userProfileItem.emojiList, userProfileItemSelection.userEmojiSelected)
-            UserProfileItem(userProfileItemSelection.userProfileItem.userName, userProfileItemSelection.userProfileItem.profileImage, emojiList) }
+        mUserListProfile?.value = userProfileItemSelection.map { userProfileItemSelection ->
+            val emojiList = verifyHasEmoji(userProfileItemSelection.userProfile.currentEmojiList, userProfileItemSelection.userEmojiSelected)
+            UserProfile(userProfileItemSelection.userProfile.userName, "xxxxxx", profileImage = userProfileItemSelection.userProfile.profileImage, currentEmojiList = emojiList) }
     }
 
-    private fun verifyHasEmoji(emojiList: MutableList<EmojiCarouselItem>, emojiID: Int?): MutableList<EmojiCarouselItem>{
+    private fun verifyHasEmoji(emojiList: MutableList<Emoji>, emojiID: Int?): MutableList<Emoji>{
         var hasEmoji = false
 
         emojiList.forEach {
@@ -41,7 +40,7 @@ class SelectViewModel : ViewModel() {
         }
 
         if(!hasEmoji && emojiID != null){
-            emojiList.add(EmojiCarouselItem(emojiID, 1))
+            emojiList.add(Emoji(emojiID, 1))
             return emojiList
         }
 
