@@ -4,12 +4,10 @@ import com.samirmaciel.queridometroapp.model.Emoji
 import java.util.*
 
 data class UserProfile(
-    val userName : String,
-    val userID: String,
-    var lastDateSelected: Date? = null,
-    var roomID: String? = null,
-    val profileImage : String,
-    var currentEmojiList : MutableList<Emoji>,
-    var usersSelectedEmojiList: MutableList<UserEmojiSelection>? = null,
+    var userName : String? = null,
+    var userID: String? = null,
+    var roomIDEntered: String? = null,
+    var roomIDCreated: String? = null,
+    var profileImage : String? = null,
     var statusEmojiList: MutableList<Emoji>? = null
 )

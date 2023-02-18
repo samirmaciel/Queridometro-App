@@ -1,8 +1,8 @@
 package com.samirmaciel.queridometroapp.model
 
-import com.samirmaciel.queridometroapp.model.FireBaseModels.UserProfile
+import com.samirmaciel.queridometroapp.model.FireBaseModels.RoomMember
 
-data class UserProfileItemSelection(
-    val userProfile: UserProfile,
+data class roomMemberEmojiSelection(
+    val member: RoomMember,
     var userEmojiSelected: Int? = null
 )

@@ -9,14 +9,14 @@ import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.samirmaciel.queridometroapp.R
-import com.samirmaciel.queridometroapp.model.UserProfileItemSelection
+import com.samirmaciel.queridometroapp.model.roomMemberEmojiSelection
 import com.samirmaciel.queridometroapp.view.select.selection.SelectionEmojiFragment
 import de.hdodenhof.circleimageview.CircleImageView
 
 
-class UserSelectAdapter(val childFragmentManager: FragmentManager, val onChangeList: (List<UserProfileItemSelection>) -> Unit) : RecyclerView.Adapter<UserSelectAdapter.MyViewHolder>() {
+class UserSelectAdapter(val childFragmentManager: FragmentManager, val onChangeList: (List<roomMemberEmojiSelection>) -> Unit) : RecyclerView.Adapter<UserSelectAdapter.MyViewHolder>() {
 
-    var userProfileItemList: List<UserProfileItemSelection> = listOf()
+    var roomMemberEmojiSelectionItemList: List<roomMemberEmojiSelection> = listOf()
 
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
 
@@ -24,20 +24,20 @@ class UserSelectAdapter(val childFragmentManager: FragmentManager, val onChangeL
         val emojiImage = itemView.findViewById<ImageView>(R.id.ciSelectedEmojiImage)
         val userName = itemView.findViewById<TextView>(R.id.txtSelectUserName)
 
-        fun onBindItem(position: Int, onChangeList: (List<UserProfileItemSelection>) -> Unit){
-            Glide.with(itemView.context).load(userProfileItemList[position].userProfile.profileImage).into(userImage);
+        fun onBindItem(position: Int, onChangeList: (List<roomMemberEmojiSelection>) -> Unit){
+            Glide.with(itemView.context).load(roomMemberEmojiSelectionItemList[position].member.userImage).into(userImage);
 
-            userName.text = userProfileItemList[position].userProfile.userName
+            userName.text = roomMemberEmojiSelectionItemList[position].member.userName
 
-            if(userProfileItemList[position].userEmojiSelected != null){
-                emojiImage.setImageResource(userProfileItemList[position].userEmojiSelected!!)
+            if(roomMemberEmojiSelectionItemList[position].userEmojiSelected != null){
+                emojiImage.setImageResource(roomMemberEmojiSelectionItemList[position].userEmojiSelected!!)
             }
 
             userImage.setOnClickListener {
 
                 SelectionEmojiFragment {
-                    userProfileItemList[position].userEmojiSelected = it.emojiID
-                    onChangeList(userProfileItemList)
+                    roomMemberEmojiSelectionItemList[position].userEmojiSelected = it.emojiID
+                    onChangeList(roomMemberEmojiSelectionItemList)
                     notifyItemChanged(position)
                 }.show(childFragmentManager, "SelectionEmojiFragment")
             }
@@ -50,7 +50,7 @@ class UserSelectAdapter(val childFragmentManager: FragmentManager, val onChangeL
     }
 
     override fun getItemCount(): Int {
-        return userProfileItemList.size
+        return roomMemberEmojiSelectionItemList.size
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {

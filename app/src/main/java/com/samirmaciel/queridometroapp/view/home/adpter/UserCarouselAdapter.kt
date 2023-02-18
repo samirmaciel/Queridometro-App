@@ -1,19 +1,21 @@
 package com.samirmaciel.queridometroapp.view.home.adpter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.samirmaciel.queridometroapp.R
-import com.samirmaciel.queridometroapp.model.FireBaseModels.UserProfile
+import com.samirmaciel.queridometroapp.model.FireBaseModels.RoomMember
 import de.hdodenhof.circleimageview.CircleImageView
 
 class UserCarouselAdapter : RecyclerView.Adapter<UserCarouselAdapter.MyViewHolder>() {
 
-    var userProfileList: List<UserProfile> = listOf()
+    var roomMemberItemList: List<RoomMember> = listOf()
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
@@ -21,9 +23,9 @@ class UserCarouselAdapter : RecyclerView.Adapter<UserCarouselAdapter.MyViewHolde
         val userName = itemView.findViewById<TextView>(R.id.txtCarouselUserName)
         val rvEmoji = itemView.findViewById<RecyclerView>(R.id.rvCarouselEmoji)
 
-        fun onBindItem(userProfile: UserProfile){
-            Glide.with(itemView.context).load(userProfile.profileImage).into(userImage)
-            userName.text = userProfile.userName
+        fun onBindItem(roomMember: RoomMember){
+            Glide.with(itemView.context).load(roomMember.userImage).into(userImage)
+            userName.text = roomMember.userName
 
             val emojiAdapter = EmojiCarouselAdapter()
 
@@ -32,7 +34,7 @@ class UserCarouselAdapter : RecyclerView.Adapter<UserCarouselAdapter.MyViewHolde
                 layoutManager = LinearLayoutManager(itemView.context, LinearLayoutManager.HORIZONTAL, false)
             }
 
-            emojiAdapter.emojiList = userProfile.currentEmojiList
+            emojiAdapter.emojiList = roomMember.selectedEmojiesList ?: mutableListOf()
             emojiAdapter.notifyDataSetChanged()
         }
 
@@ -44,10 +46,10 @@ class UserCarouselAdapter : RecyclerView.Adapter<UserCarouselAdapter.MyViewHolde
     }
 
     override fun getItemCount(): Int {
-        return if(userProfileList == null) 0 else Int.MAX_VALUE
+        return if(roomMemberItemList == null) 0 else Int.MAX_VALUE
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.onBindItem(userProfileList[position % userProfileList.size])
+        holder.onBindItem(roomMemberItemList.get(position % roomMemberItemList.size))
     }
 }

@@ -1,7 +1,10 @@
 package com.samirmaciel.queridometroapp.model.FireBaseModels
 
+import java.util.*
+
 data class UserEmojiSelection(
-    val userID: String,
-    var emojiID: Int,
-    var isSelected: Boolean
+    var roomID: String? = null,
+    var userID: String? = null,
+    var emojiID: Int? = null,
+    var selectedDate: Date? = null
 )

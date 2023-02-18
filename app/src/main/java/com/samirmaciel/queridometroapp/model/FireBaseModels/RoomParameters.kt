@@ -1,6 +1,6 @@
 package com.samirmaciel.queridometroapp.model.FireBaseModels
 
-data class AppParameters(
+data class RoomParameters(
     var roomIDKeys: Int? = null,
-    var roomIDs: Array<String>? = null
+    var roomIDs: MutableList<String>? = null
 )

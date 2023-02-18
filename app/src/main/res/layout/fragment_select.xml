@@ -15,6 +15,7 @@
         android:id="@+id/txtSelectFriend"
         style="@style/title_default"
         android:layout_marginTop="90dp"
+        android:layout_marginHorizontal="16dp"
         android:text="@string/title_select_friend"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -39,6 +40,17 @@
         android:id="@+id/btnSelectContinue"
         style="@style/button_default"
         android:text="@string/title_continue"
+        app:cornerRadius="15dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginHorizontal="50dp"
+        app:layout_constraintBottom_toTopOf="@id/btnSelectExitRoom"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="parent"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnSelectExitRoom"
+        style="@style/button_default"
+        android:text="@string/title_go_back_to_lobby"
         app:cornerRadius="15dp"
         android:layout_marginBottom="28dp"
         android:layout_marginHorizontal="50dp"

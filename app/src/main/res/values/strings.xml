@@ -12,11 +12,33 @@
     <string name="title_register_user">Cadastrar</string>
     <string name="title_confirm">Confirmar</string>
     <string name="title_room_id">ID da sala</string>
-    <string name="title_enter_in_the_room">Entrar na sala</string>
+    <string name="title_enter_in_the_room">Entrar</string>
     <string name="title_create_new_room">Criar nova sala</string>
+    <string name="title_delete_my_room">Sair e apagar minha sala</string>
     <string name="title_my_status">Meu status</string>
     <string name="title_select_friend">Selecione um participante</string>
     <string name="title_continue">Continuar</string>
     <string name="title_home_room_id">ID da sala:</string>
     <string name="title_creating_your_room">Criando sua sala...</string>
+    <string name="title_creating_user">Estamos registrando você ;)</string>
+    <string name="title_get_out_room">Sair da sala</string>
+    <string name="title_room_created_with_success">"Sua sala foi criada com sucesso!"</string>
+    <string name="title_question_delete_room">Deseja realmente apagar sua sala?</string>
+    <string name="title_question_get_out_room">Deseja realmente sair da sala?</string>
+    <string name="title_go_back_to_lobby">Voltar para o lobby</string>
+    <string name="title_username_minimum_lenth">Seu nome precisa ter no mínimo 5 caracteres</string>
+    <string name="title_name_not_can_has_space">O nome não pode conter espaço</string>
+    <string name="title_fill_with_valid_email">Preencha com um email valido</string>
+    <string name="title_password_minimum_lenth">Sua senha precisa ter no mínimo 8 caracters</string>
+    <string name="title_password_not_equal">As duas senhas não coincidem</string>
+    <string name="title_question_log_out">Deseja realmente sair?</string>
+    <string name="title_enter_with_room_id">Entre com o id da sala!</string>
+    <string name="title_your_room_was_deleted">A sala que você estava %s foi excluida"</string>
+    <string name="title_your_room_is">Você está na sala %s</string>
+    <string name="title_yes">Sim</string>
+    <string name="title_no">Não</string>
+
+    <string name="message_my_status_comming_son">Em breve você poderá ver seu status!</string>
+
+    <string name="message_about">Este app foi inspirado no queridometro do Big Brother Brasil, onde os participantes podem selecionar um emoji para cada um dos outros membros da casa, isso ocorre apenas uma vez ao dia.\n\n Aqui no app você pode criar uma sala ou entrar em uma já criada, o usuário pode apenas estar em uma sala. Se você sair da sala criada por você, ela automaticamente será apagada.\n\n\n samirmaciel.dev@gmail.com</string>
 </resources>

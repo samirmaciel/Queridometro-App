@@ -6,5 +6,7 @@
     <color name="primary">#460C68</color>
     <color name="secundary">#707F167F</color>
     <color name="labelBG">#CB1C8D</color>
+    <color name="green">#57BD40</color>
+    <color name="red">#960000</color>
     <color name="hint">#928F8F</color>
 </resources>

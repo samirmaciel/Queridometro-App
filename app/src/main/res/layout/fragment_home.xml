@@ -16,12 +16,13 @@
         android:id="@+id/txtHomeRoomIDTitle"
         style="@style/title_default"
         android:layout_width="wrap_content"
-        android:textSize="15sp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="5dp"
         android:layout_marginStart="16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:text="@string/title_home_room_id"/>
+        android:text="@string/title_home_room_id"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="@+id/btnArrowBackToLobby"
+        app:layout_constraintStart_toEndOf="@id/btnArrowBackToLobby"
+        app:layout_constraintTop_toTopOf="@+id/btnArrowBackToLobby" />
 
     <TextView
         android:id="@+id/txtHomeRoomIDValue"
@@ -35,14 +36,14 @@
         tools:text="000000"/>
 
     <ImageView
-        android:id="@+id/btnHomeLogout"
+        android:id="@+id/btnArrowBackToLobby"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="16dp"
-        android:src="@drawable/ic_baseline_logout_24"/>
+        android:layout_marginStart="16dp"
+        android:src="@drawable/baseline_arrow_back_ios_24"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvHomeUsers"

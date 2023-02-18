@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="128dp"
+        android:layout_marginTop="50dp"
         app:cardBackgroundColor="@color/labelBG">
 
             <TextView
@@ -36,8 +36,9 @@
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/cvRegisterImage"
                 android:elevation="5dp"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_gravity="center"
+                android:layout_width="190dp"
+                android:layout_height="190dp"/>
 
     </androidx.cardview.widget.CardView>
 
@@ -48,39 +49,69 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="20dp"
-        android:layout_marginStart="58dp"
-        android:layout_marginEnd="58dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txtRegisterNotificationImage"
+            android:textColor="@color/red"
+            android:visibility="invisible"
+            android:text="É preciso carregar uma imagem!"
+            style="@style/subtitle_default" />
 
         <EditText
             android:id="@+id/edtRegisterName"
-            android:layout_marginBottom="10dp"
             android:hint="@string/title_name"
             android:textColor="@color/white"
-            android:maxLength="20"
+            android:maxLength="10"
             style="@style/edt_default"/>
+
+        <TextView
+            android:id="@+id/txtRegisterNotificationUserName"
+            android:textColor="@color/red"
+            android:visibility="invisible"
+            android:text="@string/title_username_minimum_lenth"
+            style="@style/subtitle_default" />
         <EditText
             android:id="@+id/edtRegisterEmail"
-            android:layout_marginBottom="10dp"
             android:textColor="@color/white"
+            android:inputType="textEmailAddress"
             android:hint="@string/title_email"
             style="@style/edt_default"/>
+        <TextView
+            android:id="@+id/txtRegisterNotificationEmail"
+            android:textColor="@color/red"
+            android:visibility="invisible"
+            android:text="@string/title_fill_with_valid_email"
+            style="@style/subtitle_default" />
         <EditText
             android:id="@+id/edtRegisterPassword"
-            android:layout_marginBottom="10dp"
             android:textColor="@color/white"
             android:hint="@string/title_password"
             android:inputType="textPassword"
             android:maxLength="20"
             style="@style/edt_default"/>
+        <TextView
+            android:id="@+id/txtRegisterNotificationPassword"
+            android:textColor="@color/red"
+            android:visibility="invisible"
+            android:text="@string/title_password_minimum_lenth"
+            style="@style/subtitle_default" />
         <EditText
             android:id="@+id/edtRegisterRepeatPassword"
-            android:layout_marginBottom="10dp"
             android:textColor="@color/white"
             android:hint="@string/title_repeatpassword"
             android:inputType="textPassword"
             android:maxLength="20"
             style="@style/edt_default"/>
+
+        <TextView
+            android:id="@+id/txtRegisterNotificationRepeatedPassword"
+            android:textColor="@color/red"
+            android:visibility="invisible"
+            android:text="@string/title_password_not_equal"
+            style="@style/subtitle_default" />
 
         <Button
             android:id="@+id/btnRegisterConfirm"
@@ -89,6 +120,23 @@
             android:text="@string/title_confirm"
             app:cornerRadius="15dp"
             style="@style/button_default"/>
+
+        <ProgressBar
+            android:id="@+id/progressLoadCreatingUser"
+            android:visibility="gone"
+            tools:visibility="visible"
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/txtCreatingUser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            tools:visibility="visible"
+            android:text="@string/title_creating_user"
+            style="@style/title_default"/>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,9 +1,12 @@
 package com.samirmaciel.queridometroapp.view.login
 
+import android.app.AlertDialog
+import android.icu.text.CaseMap.Title
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
+import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -22,6 +25,13 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         setupViewModels()
         setupListeners()
         setupObservers()
+        checkCurrentUser()
+    }
+
+    private fun checkCurrentUser() {
+        if(mViewModel?.checkCurrentUser() == true){
+            findNavController().navigate(R.id.action_loginFragment_to_lobbyFragment)
+        }
     }
 
     private fun setupObservers() {
@@ -42,11 +52,26 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         mBinding?.edtLoginPassword?.doOnTextChanged{password, _,_,_ -> mViewModel?.setInputPasswordStatus(mViewModel?.validateInputPassword(password.toString()))}
 
         mBinding?.btnLoginEnter?.setOnClickListener {
-            findNavController().navigate(R.id.action_loginFragment_to_lobbyFragment)
+            mViewModel?.makeLogin(mBinding?.edtLoginEmail?.text.toString(), mBinding?.edtLoginPassword?.text.toString()){
+
+                if(it.first){
+                    findNavController().navigate(R.id.action_loginFragment_to_lobbyFragment)
+                }else{
+                    Toast.makeText(requireContext(), it.second, Toast.LENGTH_LONG).show()
+                }
+            }
         }
 
         mBinding?.txtLoginNewRegister?.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
+        }
+
+        mBinding?.btnLoginHelp?.setOnClickListener {
+            AlertDialog.Builder(requireContext()).apply {
+                setTitle("Queridometro 1.2v")
+                setMessage(resources.getString(R.string.message_about))
+                setPositiveButton("Ok", null)
+            }.show()
         }
     }
 

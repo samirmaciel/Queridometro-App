@@ -11,7 +11,7 @@ import com.samirmaciel.queridometroapp.model.Emoji
 
 class EmojiCarouselAdapter : RecyclerView.Adapter<EmojiCarouselAdapter.MyViewHolder>() {
 
-    var emojiList: List<Emoji> = listOf()
+    var emojiList: MutableList<Emoji> = mutableListOf()
 
     class MyViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
 
@@ -19,7 +19,7 @@ class EmojiCarouselAdapter : RecyclerView.Adapter<EmojiCarouselAdapter.MyViewHol
         val txtCountEmoji = itemView.findViewById<TextView>(R.id.txtCountEmojiCarousel)
 
         fun onBindItem(emoji: Emoji){
-            emojiImage.setImageResource(emoji.emojiID)
+            emojiImage.setImageResource(emoji.emojiID!!)
             txtCountEmoji.text = emoji.count.toString()
         }
 

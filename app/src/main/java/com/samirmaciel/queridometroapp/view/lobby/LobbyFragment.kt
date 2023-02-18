@@ -50,18 +50,37 @@ class LobbyFragment : Fragment(R.layout.fragment_lobby) {
             mBinding?.btnRoomEntered?.visibility = View.GONE
             mBinding?.btnLobbyCreateNewRoom?.text = resources.getText(R.string.title_create_new_room)
             if(roomIDEntered != null) {
-                Toast.makeText(requireContext(), "A sala que você estava ${roomIDEntered} foi excluida", Toast.LENGTH_LONG).show()
+                mViewModel?.cleanUserProfileRoom()
+                getToastMessage(resources.getString(R.string.title_your_room_was_deleted, roomIDEntered))
             }
         }else if(roomIDCreated != null){
-            mBinding?.btnRoomEntered?.text = "Você está na sala ${roomIDEntered}"
+            mBinding?.btnRoomEntered?.text = resources.getString(R.string.title_your_room_is, roomIDEntered)
             mBinding?.edtLobbyRoomID?.visibility = View.GONE
             mBinding?.btnRoomEntered?.visibility = View.VISIBLE
             mBinding?.btnLobbyCreateNewRoom?.text = resources.getText(R.string.title_delete_my_room)
-        }else{
-            mBinding?.btnRoomEntered?.text = "Você está na sala ${roomIDEntered}"
+        }else if(roomIDEntered != null){
+            mBinding?.btnRoomEntered?.text = resources.getString(R.string.title_your_room_is, roomIDEntered)
             mBinding?.edtLobbyRoomID?.visibility = View.GONE
             mBinding?.btnRoomEntered?.visibility = View.VISIBLE
             mBinding?.btnLobbyCreateNewRoom?.text = resources.getText(R.string.title_get_out_room)
+        }
+    }
+
+    private fun setupListeners() {
+
+        mBinding?.btnLobbyMyStatus?.setOnClickListener {
+            getToastMessage(resources.getString(R.string.message_my_status_comming_son))
+        }
+        mBinding?.btnLobbyLogout?.setOnClickListener {
+            getAlertLogout()
+        }
+
+        mBinding?.btnLobbyEnterRoom?.setOnClickListener {
+            enterRoom()
+        }
+
+        mBinding?.btnLobbyCreateNewRoom?.setOnClickListener {
+            createOrDeleteRoom()
         }
     }
 
@@ -70,87 +89,75 @@ class LobbyFragment : Fragment(R.layout.fragment_lobby) {
         mBinding?.txtLobbyUserName?.text = userProfile?.userName
     }
 
-    private fun setupListeners() {
+    private fun createOrDeleteRoom() {
+        val roomIDEntered = mViewModel?.mCurrentUserProfile?.value?.roomIDEntered
+        val roomIDCreated = mViewModel?.mCurrentUserProfile?.value?.roomIDCreated
 
-        mBinding?.btnLobbyMyStatus?.setOnClickListener {
-            Toast.makeText(requireContext(), "Calma calma internauta, em breve você poderá ver seu status!", Toast.LENGTH_LONG).show()
-        }
-        mBinding?.btnLobbyLogout?.setOnClickListener {
-            val alertDialog = AlertDialog.Builder(requireContext()).apply {
-                setTitle("Deseja realmente sair?")
-                setPositiveButton("Sim"){_, _ ->
-                    if(mViewModel?.logout() == true) findNavController().navigate(R.id.action_lobbyFragment_to_loginFragment)
-                }
-                setNegativeButton("Não", null)
-            }.show()
-        }
-
-        mBinding?.btnLobbyEnterRoom?.setOnClickListener {
-            var roomID: String = ""
-            val roomIDEntered = mViewModel?.mCurrentUserProfile?.value?.roomIDEntered
-            val roomIDCreated = mViewModel?.mCurrentUserProfile?.value?.roomIDCreated
-
-            if(roomIDCreated != null){
-                roomID = roomIDCreated
-            }else if(roomIDEntered != null){
-                roomID = roomIDEntered
-            }else{
-                roomID = mBinding?.edtLobbyRoomID?.text.toString()
-            }
-
-            mViewModel?.enterRoom(roomID){
-                if(it.first){
+        if(roomIDCreated == null && roomIDEntered == null) {
+            isLoadingCreatingRoom(true)
+            mViewModel?.createRoom {
+                isLoadingCreatingRoom(false)
+                if (it.first) {
+                    getToastMessage(resources.getString(R.string.title_room_created_with_success))
                     findNavController().navigate(R.id.action_lobbyFragment_to_selectFragment)
-                }else{
-                    Toast.makeText(requireContext(), it.second, Toast.LENGTH_LONG).show()
+                } else {
+                    getToastMessage(it.second)
                 }
             }
-
-        }
-
-        mBinding?.btnLobbyCreateNewRoom?.setOnClickListener {
-            val roomIDEntered = mViewModel?.mCurrentUserProfile?.value?.roomIDEntered
-            val roomIDCreated = mViewModel?.mCurrentUserProfile?.value?.roomIDCreated
-
-            if(roomIDCreated == null && roomIDEntered == null) {
-                isLoadingCreatingRoom(true)
-                mViewModel?.createRoom {
-                    isLoadingCreatingRoom(false)
-                    if (it.first) {
-                        Toast.makeText(
-                            requireContext(),
-                            "Sua sala foi criada com sucesso!",
-                            Toast.LENGTH_LONG
-                        ).show()
-                        findNavController().navigate(R.id.action_lobbyFragment_to_selectFragment)
-                    } else {
-                        Toast.makeText(requireContext(), it.second, Toast.LENGTH_LONG).show()
-                    }
-                }
+        }else{
+            if(roomIDCreated != null){
+                getAlertDeleteRoom()
             }else{
-                if(roomIDCreated != null){
-                    val alertDialog = AlertDialog.Builder(requireContext()).apply {
-                        setTitle("Deseja realmente apagar sua sala?")
-                        setPositiveButton("Sim"){_,_ ->
-                            mViewModel?.deleteRoom()
-                        }
-                        setNegativeButton("Não", null)
-                    }.show()
-                }else{
-                    val alertDialog = AlertDialog.Builder(requireContext()).apply {
-                        setTitle("Deseja realmente sair da sala?")
-                        setPositiveButton("Sim"){_,_ ->
-                            mViewModel?.exitRoom()
-                        }
-                        setNegativeButton("Não", null)
-                    }.show()
-                }
+                getAlertExitRoom()
             }
         }
     }
 
-    private fun validateRoomIDField(text: String): Boolean {
-        return !text.isNullOrEmpty() && text.length > 8
+    private fun enterRoom() {
+        var roomID: String = ""
+        val roomIDEntered = mViewModel?.mCurrentUserProfile?.value?.roomIDEntered
+        val roomIDCreated = mViewModel?.mCurrentUserProfile?.value?.roomIDCreated
+
+        if(roomIDCreated != null){
+            roomID = roomIDCreated
+        }else if(roomIDEntered != null){
+            roomID = roomIDEntered
+        }else{
+            roomID = mBinding?.edtLobbyRoomID?.text.toString()
+        }
+
+        if(roomID.length > 1){
+            mViewModel?.enterRoom(roomID){
+                if(it.first){
+                    findNavController().navigate(R.id.action_lobbyFragment_to_selectFragment)
+                }else{
+                    getToastMessage(it.second)
+                }
+            }
+        }else{
+            getToastMessage(resources.getString(R.string.title_enter_with_room_id) , false)
+        }
+
+    }
+
+    private fun getAlertLogout() {
+        val alertDialog = AlertDialog.Builder(requireContext()).apply {
+            setTitle(resources.getString(R.string.title_question_log_out))
+            setPositiveButton(resources.getString(R.string.title_yes)){_, _ ->
+                if(mViewModel?.logout() == true) findNavController().navigate(R.id.action_lobbyFragment_to_loginFragment)
+            }
+            setNegativeButton(resources.getString(R.string.title_no), null)
+        }.show()
+    }
+
+    private fun getAlertDeleteRoom() {
+        val alertDialog = AlertDialog.Builder(requireContext()).apply {
+            setTitle(resources.getString(R.string.title_question_delete_room))
+            setPositiveButton(resources.getString(R.string.title_yes)){_,_ ->
+                mViewModel?.deleteRoom()
+            }
+            setNegativeButton(resources.getString(R.string.title_no), null)
+        }.show()
     }
 
     private fun isLoadingCreatingRoom(value: Boolean){
@@ -170,10 +177,27 @@ class LobbyFragment : Fragment(R.layout.fragment_lobby) {
 
     }
 
+    private fun getAlertExitRoom(){
+        val alertDialog = AlertDialog.Builder(requireContext()).apply {
+            setTitle(resources.getString(R.string.title_question_get_out_room))
+            setPositiveButton(resources.getString(R.string.title_yes)){_,_ ->
+                mViewModel?.exitRoom()
+            }
+            setNegativeButton(resources.getString(R.string.title_no), null)
+        }.show()
+    }
+
+    private fun getToastMessage(message: String, isLong: Boolean? = null) {
+        Toast.makeText(
+            requireContext(),
+            message,
+            if(isLong == true) Toast.LENGTH_LONG else Toast.LENGTH_SHORT
+        ).show()
+    }
+
     private fun setupBinding(view: View) {
         mBinding = FragmentLobbyBinding.bind(view)
     }
-
 
     override fun onDestroy() {
         super.onDestroy()
