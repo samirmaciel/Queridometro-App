@@ -50,7 +50,7 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnSelectExitRoom"
         style="@style/button_default"
-        android:text="@string/title_go_back_to_lobby"
+        android:text="Compartilhar minha sala"
         app:cornerRadius="15dp"
         android:layout_marginBottom="28dp"
         android:layout_marginHorizontal="50dp"

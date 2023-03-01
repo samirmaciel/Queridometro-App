@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
+    android:layout_width="100dp"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:gravity="center"
@@ -10,7 +10,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <FrameLayout
         android:layout_gravity="center"
-        android:layout_width="match_parent"
+        android:layout_width="80dp"
         android:layout_height="match_parent">
 
         <de.hdodenhof.circleimageview.CircleImageView
@@ -31,7 +31,7 @@
 
 
     <androidx.cardview.widget.CardView
-        android:layout_width="80dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
         app:cardCornerRadius="6dp">
@@ -43,7 +43,7 @@
             android:layout_marginHorizontal="8dp"
             android:layout_marginTop="2dp"
             android:textSize="10sp"
-            tools:text="userName"/>
+            tools:text="wwwwwwwwww"/>
     </androidx.cardview.widget.CardView>
 
 </LinearLayout>

@@ -8,6 +8,4 @@ enum class InputStatus {
     INPUT_IMAGE_NOT_FOUND,
     INPUT_INVALID_EMAIL,
     INPUT_HAS_SPACE,
-
-
 }

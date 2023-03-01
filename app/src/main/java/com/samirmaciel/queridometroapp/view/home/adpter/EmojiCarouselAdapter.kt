@@ -18,9 +18,15 @@ class EmojiCarouselAdapter : RecyclerView.Adapter<EmojiCarouselAdapter.MyViewHol
         val emojiImage = itemView.findViewById<ImageView>(R.id.ivEmojiCarousel)
         val txtCountEmoji = itemView.findViewById<TextView>(R.id.txtCountEmojiCarousel)
 
-        fun onBindItem(emoji: Emoji){
-            emojiImage.setImageResource(emoji.emojiID!!)
-            txtCountEmoji.text = emoji.count.toString()
+        fun onBindItem(emoji: Emoji?){
+            emoji?.let {Emoji ->
+                Emoji.emojiID?.let {emojiID ->
+                    emojiImage.setImageResource(emojiID)
+                    txtCountEmoji.text = Emoji.count.toString()
+                }
+
+            }
+
         }
 
     }

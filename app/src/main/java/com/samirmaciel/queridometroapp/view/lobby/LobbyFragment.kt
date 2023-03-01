@@ -2,6 +2,7 @@ package com.samirmaciel.queridometro.view.lobby
 
 import android.app.AlertDialog
 import android.os.Bundle
+import android.view.KeyEvent
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Toast
@@ -25,16 +26,25 @@ class LobbyFragment : Fragment(R.layout.fragment_lobby) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setupBackButton(view)
         setupBinding(view)
         setupViewModels()
         setupListeners()
         setupObservers()
+        isLoadingLobby(true)
     }
 
     private fun setupObservers() {
         mViewModel?.mCurrentUserProfile?.observe(viewLifecycleOwner){
-            mViewModel?.loadRoom(it.roomIDEntered)
-            setupUserProfile(it)
+            if(it.userID != null){
+                mViewModel?.loadRoom(it.roomIDEntered)
+                setupUserProfile(it)
+                isLoadingCreatingRoom(false)
+            }else{
+                getToastMessage("Error ao carregar usuário, tente novamente!")
+                findNavController().navigate(R.id.action_lobbyFragment_to_loginFragment)
+            }
+
         }
 
         mViewModel?.mRoomEntered?.observe(viewLifecycleOwner){
@@ -114,30 +124,41 @@ class LobbyFragment : Fragment(R.layout.fragment_lobby) {
     }
 
     private fun enterRoom() {
-        var roomID: String = ""
         val roomIDEntered = mViewModel?.mCurrentUserProfile?.value?.roomIDEntered
         val roomIDCreated = mViewModel?.mCurrentUserProfile?.value?.roomIDCreated
 
         if(roomIDCreated != null){
-            roomID = roomIDCreated
-        }else if(roomIDEntered != null){
-            roomID = roomIDEntered
-        }else{
-            roomID = mBinding?.edtLobbyRoomID?.text.toString()
-        }
-
-        if(roomID.length > 1){
-            mViewModel?.enterRoom(roomID){
+            mViewModel?.enterRoom(roomIDCreated){
                 if(it.first){
                     findNavController().navigate(R.id.action_lobbyFragment_to_selectFragment)
                 }else{
                     getToastMessage(it.second)
                 }
             }
+        }else if(roomIDEntered != null){
+            mViewModel?.enterRoom(roomIDEntered){
+                if(it.first){
+                    findNavController().navigate(R.id.action_lobbyFragment_to_selectFragment)
+                }else{
+                    getToastMessage(resources.getString(R.string.title_your_room_was_deleted, roomIDEntered))
+                    updateUI(null)
+                }
+            }
         }else{
-            getToastMessage(resources.getString(R.string.title_enter_with_room_id) , false)
-        }
+            val roomID = mBinding?.edtLobbyRoomID?.text.toString()
+            if(roomID.length > 1){
+                mViewModel?.enterRoom(roomID){
+                    if(it.first){
+                        findNavController().navigate(R.id.action_lobbyFragment_to_selectFragment)
+                    }else{
+                        getToastMessage(it.second)
+                    }
+                }
+            }else{
+                getToastMessage(resources.getString(R.string.title_enter_with_room_id) , false)
+            }
 
+        }
     }
 
     private fun getAlertLogout() {
@@ -163,6 +184,15 @@ class LobbyFragment : Fragment(R.layout.fragment_lobby) {
     private fun isLoadingCreatingRoom(value: Boolean){
         mBinding?.progressLoadCreatingRoom?.visibility = if(value) View.VISIBLE else View.GONE
         mBinding?.txtCreatingYourRoom?.visibility = if(value) View.VISIBLE else View.GONE
+
+        mBinding?.btnLobbyEnterRoom?.isEnabled = !value
+        mBinding?.btnLobbyCreateNewRoom?.isEnabled = !value
+        mBinding?.btnLobbyMyStatus?.isEnabled = !value
+        mBinding?.edtLobbyRoomID?.isEnabled = !value
+    }
+
+    private fun isLoadingLobby(value: Boolean){
+        mBinding?.progressLoadCreatingRoom?.visibility = if(value) View.VISIBLE else View.GONE
 
         mBinding?.btnLobbyEnterRoom?.isEnabled = !value
         mBinding?.btnLobbyCreateNewRoom?.isEnabled = !value
@@ -197,6 +227,21 @@ class LobbyFragment : Fragment(R.layout.fragment_lobby) {
 
     private fun setupBinding(view: View) {
         mBinding = FragmentLobbyBinding.bind(view)
+    }
+
+    private fun setupBackButton(view: View){
+        view.isFocusableInTouchMode = true
+        view.requestFocus()
+        view.setOnKeyListener(View.OnKeyListener{ v, keyCode, event ->
+            if(event.action === KeyEvent.ACTION_DOWN){
+                if(keyCode == KeyEvent.KEYCODE_BACK){
+                    getAlertLogout()
+                    return@OnKeyListener true
+                }
+            }
+
+            false
+        })
     }
 
     override fun onDestroy() {

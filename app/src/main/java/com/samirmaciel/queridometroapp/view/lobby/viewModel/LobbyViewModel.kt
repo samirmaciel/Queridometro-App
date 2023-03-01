@@ -128,11 +128,16 @@ class LobbyViewModel: ViewModel() {
 
     private fun updateRoomToExit(room: Room?){
         if(room == null) return
-        mRoomEntered?.value = null
-        mFireStore.collection("rooms").document(room.roomID!!).set(room).addOnSuccessListener {
 
-        }.addOnFailureListener {
+        checkIfRoomExitis(room){
+            if(it){
+                mRoomEntered?.value = null
+                mFireStore.collection("rooms").document(room.roomID!!).set(room).addOnSuccessListener {
 
+                }.addOnFailureListener {
+
+                }
+            }
         }
     }
 
@@ -147,11 +152,23 @@ class LobbyViewModel: ViewModel() {
         }
     }
 
-    fun checkUserRoom(onFinish: (Pair<Boolean, String?>) -> Unit){
-        if(mCurrentUserProfile?.value?.roomIDCreated != null ){
-            onFinish(Pair(true, mCurrentUserProfile?.value?.roomIDCreated))
-        }else{
-            onFinish(Pair(false, null))
+    private fun checkIfRoomExitis(room: Room?, onResult: (Boolean) -> Unit){
+        if(room?.roomID == null){
+            onResult(false)
+            return
+        }
+
+        mFireStore.collection("rooms").document(room.roomID!!).get().addOnSuccessListener {
+            val room = it.toObject(Room::class.java)
+
+            if(room != null){
+                onResult(true)
+            }else{
+                onResult(false)
+            }
+
+        }.addOnFailureListener {
+            onResult(false)
         }
     }
 
@@ -245,7 +262,7 @@ class LobbyViewModel: ViewModel() {
 
         newRoom?.roomMembersList?.remove(roomMember)
         newRoom?.usersIDsParticipants?.remove(newUserProfile?.userID)
-        Log.d("DELETESAIR", "exitRoom: RoomMemberListeSize: ${newRoom?.roomMembersList?.size}" )
+
         updateRoomToExit(newRoom)
         updateUserProfile(newUserProfile)
 

@@ -19,13 +19,23 @@ class SelectViewModel : ViewModel() {
     var mRoomEntered: MutableLiveData<Room>? = MutableLiveData()
     var mListenerNewUsers: MutableLiveData<String?> = MutableLiveData()
     var mRoomMemberList: MutableLiveData<MutableList<RoomMember>>? = MutableLiveData()
+    var mOldRoomEntered: Room? = null
+    var isListenerRoomEntered: Boolean = false
 
     fun initializeViewModel(roomMemberList: MutableLiveData<MutableList<RoomMember>>?, roomEntered: MutableLiveData<Room>?, currentUserProfile: MutableLiveData<UserProfile>?){
         mRoomEntered = roomEntered
         mCurrentUserProfile = currentUserProfile
         mRoomMemberList = roomMemberList
         mRoomMemberList?.value = roomEntered?.value?.roomMembersList
-        listenerNewMembers()
+
+        mOldRoomEntered = roomEntered?.value
+
+        mRoomEntered?.value?.let {
+            listenerNewMembers(it.roomID)
+        }
+
+        isListenerRoomEntered = false
+
     }
 
     fun validateSelectionUsersEmoji(list: List<roomMemberEmojiSelection>): Boolean{
@@ -116,7 +126,8 @@ class SelectViewModel : ViewModel() {
 
     }
 
-    fun updateRoomMembers(roomMemberEmojiSelectionList: List<roomMemberEmojiSelection>){
+    fun updateRoomMembers(roomMemberEmojiSelectionList: List<roomMemberEmojiSelection>?){
+        if(roomMemberEmojiSelectionList == null) return
         val roomMembersList = mRoomEntered?.value?.roomMembersList ?: mutableListOf()
 
         roomMembersList.forEach {roomMember ->
@@ -173,13 +184,19 @@ class SelectViewModel : ViewModel() {
         return isEmpty
     }
 
-    private fun listenerNewMembers(){
-        val query = mFireStore.collection(mRoomEntered?.value?.roomID!!)
-        query.addSnapshotListener{snapshots, e ->
-            if(snapshots != null && !snapshots.documents.isNullOrEmpty()){
-                val room = snapshots.documents.first()?.toObject(Room::class.java)
-                mListenerNewUsers.value = room?.usersIDsParticipants?.size.toString()
+    private fun listenerNewMembers(roomID: String?){
+        if(roomID == null) return
+        val docRef = mFireStore.collection("rooms").document(roomID)
+        docRef.addSnapshotListener { snapshot, e ->
+            if (e != null) {
             }
+
+            if (snapshot != null && snapshot.exists()) {
+                mOldRoomEntered = mRoomEntered?.value
+                mRoomEntered?.value = snapshot.toObject(Room::class.java)
+                isListenerRoomEntered = true
+            }
+
         }
     }
 

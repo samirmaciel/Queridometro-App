@@ -11,8 +11,8 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/ivEmojiCarousel"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:elevation="2dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -20,11 +20,11 @@
         tools:src="@drawable/emojihappy"/>
 
     <LinearLayout
-        android:layout_width="28dp"
-        android:layout_height="30dp"
+        android:layout_width="35dp"
+        android:layout_height="40dp"
         android:elevation="1dp"
         android:gravity="bottom"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/background_item_emoji"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -37,8 +37,9 @@
             android:id="@+id/txtCountEmojiCarousel"
             style="@style/title_default"
             android:layout_height="15dp"
+            android:layout_marginBottom="2dp"
             tools:text="99"
-            android:textSize="10sp"/>
+            android:textSize="12sp"/>
 
     </LinearLayout>
 

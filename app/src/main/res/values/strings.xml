@@ -33,7 +33,7 @@
     <string name="title_password_not_equal">As duas senhas não coincidem</string>
     <string name="title_question_log_out">Deseja realmente sair?</string>
     <string name="title_enter_with_room_id">Entre com o id da sala!</string>
-    <string name="title_your_room_was_deleted">A sala que você estava %s foi excluida"</string>
+    <string name="title_your_room_was_deleted">A sala que você estava %s foi excluida por seu dono"</string>
     <string name="title_your_room_is">Você está na sala %s</string>
     <string name="title_yes">Sim</string>
     <string name="title_no">Não</string>
