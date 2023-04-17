@@ -12,12 +12,18 @@
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
+            app:enterAnim="@anim/enter_anim"
+            app:exitAnim="@anim/exit_anim"
             android:id="@+id/action_loginFragment_to_lobbyFragment"
             app:destination="@id/lobbyFragment" />
         <action
+            app:enterAnim="@anim/enter_anim"
+            app:exitAnim="@anim/exit_anim"
             android:id="@+id/action_loginFragment_to_registerFragment"
             app:destination="@id/registerFragment" />
         <action
+            app:enterAnim="@anim/enter_anim"
+            app:exitAnim="@anim/exit_anim"
             android:id="@+id/action_loginFragment_to_selectFragment"
             app:destination="@id/selectFragment" />
     </fragment>
@@ -27,9 +33,13 @@
         android:label="HomeFragment"
         tools:layout="@layout/fragment_home">
         <action
+            app:enterAnim="@anim/enter_anim"
+            app:exitAnim="@anim/exit_anim"
             android:id="@+id/action_homeFragment_to_lobbyFragment"
             app:destination="@id/lobbyFragment" />
         <action
+            app:enterAnim="@anim/enter_anim"
+            app:exitAnim="@anim/exit_anim"
             android:id="@+id/action_homeFragment_to_selectFragment"
             app:destination="@id/selectFragment" />
     </fragment>
@@ -39,12 +49,18 @@
         tools:layout="@layout/fragment_lobby"
         android:label="LobbyFragment" >
         <action
+            app:enterAnim="@anim/enter_anim"
+            app:exitAnim="@anim/exit_anim"
             android:id="@+id/action_lobbyFragment_to_selectFragment"
             app:destination="@id/selectFragment" />
         <action
+            app:enterAnim="@anim/enter_anim"
+            app:exitAnim="@anim/exit_anim"
             android:id="@+id/action_lobbyFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
         <action
+            app:enterAnim="@anim/enter_anim"
+            app:exitAnim="@anim/exit_anim"
             android:id="@+id/action_lobbyFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
     </fragment>
@@ -54,6 +70,8 @@
         tools:layout="@layout/fragment_register"
         android:label="RegisterFragment" >
         <action
+            app:enterAnim="@anim/enter_anim"
+            app:exitAnim="@anim/exit_anim"
             android:id="@+id/action_registerFragment_to_lobbyFragment"
             app:destination="@id/lobbyFragment" />
     </fragment>
@@ -63,9 +81,13 @@
         tools:layout="@layout/fragment_select"
         android:label="SelectFragment" >
         <action
+            app:enterAnim="@anim/enter_anim"
+            app:exitAnim="@anim/exit_anim"
             android:id="@+id/action_selectFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
         <action
+            app:enterAnim="@anim/enter_anim"
+            app:exitAnim="@anim/exit_anim"
             android:id="@+id/action_selectFragment_to_lobbyFragment"
             app:destination="@id/lobbyFragment" />
     </fragment>

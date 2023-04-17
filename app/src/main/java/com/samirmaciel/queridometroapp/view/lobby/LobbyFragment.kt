@@ -41,7 +41,7 @@ class LobbyFragment : Fragment(R.layout.fragment_lobby) {
                 setupUserProfile(it)
                 isLoadingCreatingRoom(false)
             }else{
-                getToastMessage("Error ao carregar usuário, tente novamente!")
+                getToastMessage(resources.getString(R.string.message_error_to_load_user))
                 findNavController().navigate(R.id.action_lobbyFragment_to_loginFragment)
             }
 

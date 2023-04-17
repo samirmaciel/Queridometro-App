@@ -38,7 +38,14 @@
     <string name="title_yes">Sim</string>
     <string name="title_no">Não</string>
 
+    <string name="message_user_entered">%s acabou de entrar!</string>
+    <string name="message_user_getout">%s acabou de Sair!</string>
+    <string name="message_your_room_dont_has_members">Sua sala não possui membros, convide seus amigos! O ID da sua sala é %s</string>
+    <string name="message_you_already_selected_emojis_for_all">Você já selecionou emojis para todos hoje!</string>
+    <string name="message_whatsapp"> "Venha para minha sala no Queridometro, o ID é %s"</string>
     <string name="message_my_status_comming_son">Em breve você poderá ver seu status!</string>
-
+    <string name="message_error_to_load_user">Erro ao carregar usuário, tente novamente!</string>
+    <string name="message_error_to_load_image">Ocorreu um erro ao carregar sua imagem!</string>
+    <string name="message_whatsapp_not_initialized">WhatsApp não foi inicializado em seu dispositivo!</string>
     <string name="message_about">Este app foi inspirado no queridometro do Big Brother Brasil, onde os participantes podem selecionar um emoji para cada um dos outros membros da casa, isso ocorre apenas uma vez ao dia.\n\n Aqui no app você pode criar uma sala ou entrar em uma já criada, o usuário pode apenas estar em uma sala. Se você sair da sala criada por você, ela automaticamente será apagada.\n\n\n samirmaciel.dev@gmail.com</string>
 </resources>

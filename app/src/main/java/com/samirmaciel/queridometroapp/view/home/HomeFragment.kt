@@ -57,11 +57,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
             if(pairWithNewAndWhoLeftMembersList != null){
                 pairWithNewAndWhoLeftMembersList.first.forEach {
-                    CustomSnackBar.getNotification(requireView(), requireContext(), "${it.userName} acabou de entrar!", true)
+                    CustomSnackBar.getNotification(requireView(), requireContext(), resources.getString(R.string.message_user_getout, it.userName), false)
                 }
 
                 pairWithNewAndWhoLeftMembersList.second.forEach {
-                    CustomSnackBar.getNotification(requireView(), requireContext(), "${it.userName} acabou de sair!", false)
+                    CustomSnackBar.getNotification(requireView(), requireContext(), resources.getString(R.string.message_user_entered, it.userName), true)
                 }
 
                 if(pairWithNewAndWhoLeftMembersList.first.size > 0){

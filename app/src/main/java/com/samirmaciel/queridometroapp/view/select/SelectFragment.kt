@@ -1,5 +1,6 @@
 package com.samirmaciel.queridometro.view.select
 
+import android.annotation.SuppressLint
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.os.Bundle
@@ -50,8 +51,6 @@ class SelectFragment : Fragment(R.layout.fragment_select) {
         buttonContinueVisibility(false)
 
         mBinding?.btnSelectExitRoom?.setOnClickListener {
-//            mViewModel?.clearViewModel()
-//            findNavController().navigate(R.id.action_selectFragment_to_lobbyFragment)
             shareRoomID(mViewModel?.mRoomEntered?.value?.roomID)
         }
 
@@ -61,16 +60,17 @@ class SelectFragment : Fragment(R.layout.fragment_select) {
         }
     }
 
+    @SuppressLint("SuspiciousIndentation")
     private fun setupObservers() {
         mViewModel?.mRoomUserListForSelectAdapter?.observe(viewLifecycleOwner){
-            Log.d("TESTESELECT", "setupObservers: " + it.size)
+
             if(it.isNullOrEmpty()){
                 if(mViewModel?.roomMembersIsEmpty(mViewModel?.mRoomEntered?.value?.roomMembersList) == true){
-                    mBinding?.txtSelectFriend?.text = "Sua sala não possui membros, convide seus amigos! O ID da sua sala é ${mViewModel?.mRoomEntered?.value?.roomID}"
+                    mBinding?.txtSelectFriend?.text = resources.getString(R.string.message_your_room_dont_has_members, mViewModel?.mRoomEntered?.value?.roomID)
                     setupAdapter(it)
                 }else{
                     buttonContinueVisibility(true)
-                    mBinding?.txtSelectFriend?.text = "Você já selecionou emojis para todos hoje!"
+                    mBinding?.txtSelectFriend?.text = resources.getString(R.string.message_you_already_selected_emojis_for_all)
                 }
             }else{
                 mBinding?.txtSelectFriend?.text = resources.getString(R.string.title_select_friend)
@@ -79,19 +79,22 @@ class SelectFragment : Fragment(R.layout.fragment_select) {
         }
 
         mViewModel?.mRoomEntered?.observe(viewLifecycleOwner){
-
+            buttonContinueVisibility(false)
             val result = sharedViewModel?.getNewMembersOrMembersWhoLeft(mViewModel?.mOldRoomEntered, it)
 
             if(result !=  null){
-                if(result?.first.isNullOrEmpty() == false || !result?.second.isNullOrEmpty()){
+
+                if(!result?.first.isNullOrEmpty() || !result?.second.isNullOrEmpty()){
 
 
                     result?.first?.forEach {
-                        CustomSnackBar.getNotification(requireView(), requireContext(), "${it.userName} acabou de entrar!", false)
+
+                        if(it.userID != mViewModel?.mCurrentUserProfile?.value?.userID)
+                        CustomSnackBar.getNotification(requireView(), requireContext(), resources.getString(R.string.message_user_entered, it.userName), true)
                     }
 
                     result?.second?.forEach {
-                        CustomSnackBar.getNotification(requireView(), requireContext(), "${it.userName} acabou de sair!", true)
+                        CustomSnackBar.getNotification(requireView(), requireContext(), resources.getString(R.string.message_user_getout, it.userName), false)
                     }
 
                     mViewModel?.validateWhoCurrentUserNotSelectedEmojiToday(it.roomMembersList)
@@ -148,7 +151,7 @@ class SelectFragment : Fragment(R.layout.fragment_select) {
 
     private fun shareRoomID(roomID: String?){
         if(roomID == null) return
-        val message = "Venha para minha sala no Queridometro, o ID é $roomID"
+        val message = resources.getString(R.string.message_whatsapp, roomID)
         val sendIntent = Intent()
         sendIntent.action = Intent.ACTION_SEND
         sendIntent.putExtra(Intent.EXTRA_TEXT, message)
@@ -158,7 +161,7 @@ class SelectFragment : Fragment(R.layout.fragment_select) {
         try{
             startActivity(sendIntent)
         }catch (ex: ActivityNotFoundException){
-            CustomSnackBar.getNotification(requireView(), requireContext(), "WhatsApp não foi inicializado em seu dispositivo!", false)
+            CustomSnackBar.getNotification(requireView(), requireContext(), resources.getString(R.string.message_whatsapp_not_initialized), false)
         }
     }
 

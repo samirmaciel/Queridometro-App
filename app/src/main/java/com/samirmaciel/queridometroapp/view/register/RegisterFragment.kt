@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.samirmaciel.queridometroapp.R
 import com.samirmaciel.queridometroapp.databinding.FragmentRegisterBinding
+import com.samirmaciel.queridometroapp.util.CustomSnackBar
 import com.samirmaciel.queridometroapp.util.InputStatus
 import com.samirmaciel.queridometroapp.view.register.viewModel.RegisterViewModel
 
@@ -194,19 +195,16 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
         val intent = Intent(Intent.ACTION_PICK)
         intent.setType("image/*");
         startActivityForResult(intent, 1)
-//        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-//        startActivityForResult(intent, 1)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode === 1) {
             try {
                 val capturedImage = data?.data
-                //capturedImage.compress(Bitmap.CompressFormat.PNG, 100, streamImagem)
                 mBinding?.cvRegisterImage?.setImageURI(capturedImage)
                 mViewModel?.imageCaptured?.value = capturedImage
             } catch (e: Exception) {
-                Log.d("TESTEIMGE", "onActivityResult: " + e.message)
+                CustomSnackBar.getNotification(requireView(), requireContext(), resources.getString(R.string.message_error_to_load_image), false)
             }
         }
     }

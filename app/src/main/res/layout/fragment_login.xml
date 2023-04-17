@@ -67,6 +67,23 @@
             app:cornerRadius="15dp"
             style="@style/button_default" />
 
+        <ProgressBar
+            android:id="@+id/progressLoadLogin"
+            android:visibility="gone"
+            tools:visibility="visible"
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/txtMakeLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            tools:visibility="visible"
+            android:text="Procurando seus dados..."
+            style="@style/title_default"/>
+
     </LinearLayout>
 
     <TextView

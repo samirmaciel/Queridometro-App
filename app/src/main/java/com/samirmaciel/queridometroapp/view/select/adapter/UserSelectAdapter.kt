@@ -1,5 +1,6 @@
 package com.samirmaciel.queridometroapp.view.select.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -36,6 +37,7 @@ class UserSelectAdapter(val childFragmentManager: FragmentManager, val onChangeL
             userImage.setOnClickListener {
 
                 SelectionEmojiFragment {
+                    Log.d("TESTEEMOJI", "onBindItem: ${it.emojiID}")
                     roomMemberEmojiSelectionItemList[position].userEmojiSelected = it.emojiID
                     onChangeList(roomMemberEmojiSelectionItemList)
                     notifyItemChanged(position)
